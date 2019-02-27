@@ -21,7 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserModel getUserById(Integer id) {
-        //调用MuserDOMapper获取对应的用户dataobject
+
+        //调用MuserDOMapper获取对应用户的dataobject
         UserDO userDO = userDOMapper.selectByPrimaryKey(id);
         if (userDO == null) {
             return null;

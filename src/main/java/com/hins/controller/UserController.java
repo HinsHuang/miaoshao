@@ -29,7 +29,7 @@ public class UserController extends BaseController {
     @Autowired
     private HttpServletRequest httpServletRequest;
 
-    //用户获取otp
+    //用户获取otp接口
     @RequestMapping(value = "/getotp", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
     public CommonReturnType getOtp(@RequestParam(name = "telphone") String telphone) {
         //按照一定规格生产otp
