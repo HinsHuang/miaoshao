@@ -1,6 +1,7 @@
 package com.hins.dao;
 
 import com.hins.domain.ItemDO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -54,4 +55,6 @@ public interface ItemDOMapper {
      * @mbg.generated Sun Mar 03 11:41:09 GMT+08:00 2019
      */
     int updateByPrimaryKey(ItemDO record);
+
+    int increaseSalesByItemId(@Param(value = "itemId") Integer itemId, @Param(value = "amount") Integer amount);
 }

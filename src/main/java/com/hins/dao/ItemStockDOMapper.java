@@ -1,6 +1,7 @@
 package com.hins.dao;
 
 import com.hins.domain.ItemStockDO;
+import org.apache.ibatis.annotations.Param;
 
 public interface ItemStockDOMapper {
     /**
@@ -52,4 +53,7 @@ public interface ItemStockDOMapper {
      * @mbg.generated Mon Mar 04 22:09:45 GMT+08:00 2019
      */
     int updateByPrimaryKey(ItemStockDO record);
+
+    int decreaseStock(@Param("itemId") Integer itemId, @Param("amount") Integer amount);
+
 }
