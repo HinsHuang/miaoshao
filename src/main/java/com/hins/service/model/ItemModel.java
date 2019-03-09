@@ -32,6 +32,9 @@ public class ItemModel {
     //商品销量
     private Integer sales;
 
+    //使用聚合模型，如果promoModel不为空，则表示该商品拥有还未结束的活动
+    private PromoModel promoModel;
+
     public Integer getId() {
         return id;
     }
@@ -86,5 +89,13 @@ public class ItemModel {
 
     public void setSales(Integer sales) {
         this.sales = sales;
+    }
+
+    public PromoModel getPromoModel() {
+        return promoModel;
+    }
+
+    public void setPromoModel(PromoModel promoModel) {
+        this.promoModel = promoModel;
     }
 }

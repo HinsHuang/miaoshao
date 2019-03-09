@@ -7,7 +7,9 @@ import com.hins.domain.ItemStockDO;
 import com.hins.error.BusinessException;
 import com.hins.error.EmBusinessError;
 import com.hins.service.ItemService;
+import com.hins.service.PromoService;
 import com.hins.service.model.ItemModel;
+import com.hins.service.model.PromoModel;
 import com.hins.validator.ValidationResult;
 import com.hins.validator.ValidatorImpl;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +32,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ValidatorImpl validator;
+
+    @Autowired
+    private PromoService promoService;
 
     @Override
     @Transactional
@@ -74,7 +79,15 @@ public class ItemServiceImpl implements ItemService {
         //获取商品库存数量
         ItemStockDO itemStockDO = itemStockDOMapper.selectByItemId(itemDO.getId());
         //将DO->Model
-        return convertItemModelFromDataObject(itemDO, itemStockDO);
+        ItemModel itemModel = convertItemModelFromDataObject(itemDO, itemStockDO);
+
+        //获取该商品的活动信息
+        PromoModel promoModel = promoService.getPromoByItemId(itemModel.getId());
+        if (promoModel != null && promoModel.getStatus().intValue() != 3) {
+            itemModel.setPromoModel(promoModel);
+        }
+
+        return itemModel;
     }
 
     @Override
